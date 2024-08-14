@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>video</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000; /* Black background for better video display */
+            position: relative; /* Make sure the buttons are positioned correctly */
+        }
+        video {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .button {
+            position: absolute;
+            top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        #unmuteButton {
+            right: 120px; /* Adjust position for multiple buttons */
+        }
+        #restartButton {
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <video id="myVideo" autoplay muted playsinline>
+        <source src="videos/12TribesQ.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <button id="unmuteButton" class="button">Unmute</button>
+    <button id="restartButton" class="button">Restart</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('myVideo');
+            const unmuteButton = document.getElementById('unmuteButton');
+            const restartButton = document.getElementById('restartButton');
+
+            // Function to unmute the video
+            unmuteButton.addEventListener('click', () => {
+                video.muted = false;
+                unmuteButton.style.display = 'none'; // Hide button after unmuting
+            });
+
+            // Function to restart the video
+            restartButton.addEventListener('click', () => {
+                video.currentTime = 0; // Set the video time to the start
+                video.play(); // Ensure the video starts playing
+            });
+
+            // Handle video playback errors
+            video.addEventListener('error', (e) => {
+                console.error('Video playback error:', e);
+            });
+        });
+    </script>
+</body>
+</html>
